@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<servers>
+  <server auto-publish-setting="2" auto-publish-time="1" com.springsource.tcserver.asf="false" com.springsource.tcserver.name="pivotal_tc_server_3_2_8_RELASE" configuration-id="/Servers/pivotal_tc_server_3_2_8_RELASE - Pivotal tc Server v3.0 - v3.2 at localhost-config" deployDir="wtpwebapps" hostname="localhost" id="pivotal_tc_server_3_2_8_RELASE - Pivotal tc Server v3.0 - v3.2 at localhost" instanceDir="/Users/denisputnam/pivotal-tc-server-developer-3.2.8.RELEASE" name="pivotal_tc_server_3_2_8_RELASE - Pivotal tc Server v3.0 - v3.2 at localhost" runtime-id="Pivotal tc Server v3.0 - v3.2" saveSeparateContextFiles="true" server-type="com.pivotal.server.tc.80" server-type-id="com.pivotal.server.tc.80" start-timeout="120" stop-timeout="15" testEnvironment="false" timestamp="0"/>
+</servers>
