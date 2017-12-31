@@ -20,8 +20,8 @@ import com.example.demo.entity.Book;
 @Transactional
 @Repository
 public interface BookDao extends JpaRepository<Book, Long> {
-    @Query("SELECT b FROM Book b WHERE b.authorName = ?1")
-	public List<Book> getByAuthor( String author );
+//    @Query("SELECT b FROM Book b WHERE b.authorName = ?1")
+//	public List<Book> getByAuthor( String author );
     
     @Query("SELECT b FROM Book b WHERE b.title = ?1")
 	public List<Book> getByTitle( String title );

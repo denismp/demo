@@ -37,7 +37,8 @@ public class BookServiceImpl implements BookService {
 	 */
 	@Override
 	public List<Book> getByAuthorName(String name) {
-		return this.bookDao.getByAuthor(name);
+		return null;
+//		return this.bookDao.getByAuthor(name);
 	}
 
 	/* (non-Javadoc)
@@ -56,7 +57,7 @@ public class BookServiceImpl implements BookService {
 		Book book = null;
 		try {
 			book = new Book();
-			book.setAuthorName(author);
+//			book.setAuthorName(author);
 			book.setTitle(title);
 			this.bookDao.saveAndFlush(book);
 		}catch( Exception e ) {
@@ -75,7 +76,7 @@ public class BookServiceImpl implements BookService {
 		Book book = null;
 		try{
 			book = bookDao.findOne(id);
-			book.setAuthorName(author);
+//			book.setAuthorName(author);
 			book.setTitle(title);
 			bookDao.saveAndFlush(book);
 		}catch( Exception e ){

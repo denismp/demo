@@ -1,9 +1,14 @@
 package com.example.demo.entity;
 
+import java.io.Serializable;
+import java.util.Set;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 //import javax.persistence.Table;
@@ -16,7 +21,7 @@ import javax.validation.constraints.NotNull;
                 @UniqueConstraint(columnNames = {"email"})
         }
 )
-public class User implements UserInterface {
+public class User implements Serializable {
 
 	/**
 	 * 
@@ -33,42 +38,96 @@ public class User implements UserInterface {
 	@NotNull
 	private String name;
 	
-	@Override
-	public long getId() {
-		// TODO Auto-generated method stub
-		return id;
+	@OneToMany(fetch=FetchType.LAZY)
+	Set<Book> books;
+	
+
+	/**
+	 * @return the books
+	 */
+	public Set<Book> getBooks() {
+		return books;
 	}
 
-	@Override
-	public long setId(long value) {
-		// TODO Auto-generated method stub
-		return id = value;
+
+	/**
+	 * @param books the books to set
+	 */
+	public void setBooks(Set<Book> books) {
+		this.books = books;
 	}
 
-	@Override
-	public String getEMail() {
-		// TODO Auto-generated method stub
+
+	/**
+	 * @return the email
+	 */
+	public String getEmail() {
 		return email;
 	}
 
-	@Override
+
+	public long getId() {
+		return id;
+	}
+
+
+	public long setId(long value) {
+		return id = value;
+	}
+
+
+	public String getEMail() {
+		return email;
+	}
+
+
 	public void setEmail(String value) {
-		// TODO Auto-generated method stub
 		email = value;
 
 	}
 
-	@Override
+
 	public String getName() {
-		// TODO Auto-generated method stub
 		return name;
 	}
 
-	@Override
+
 	public void setName(String value) {
-		// TODO Auto-generated method stub
 		name = value;
 
+	}
+
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		return result;
+	}
+
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		return true;
 	}
 
 }
