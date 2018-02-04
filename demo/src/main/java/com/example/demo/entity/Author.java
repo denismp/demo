@@ -26,7 +26,7 @@ import javax.validation.constraints.NotNull;
                 @UniqueConstraint(columnNames = {"name"})
         }
 )
-public class Author implements Serializable {
+public class Author extends History implements Serializable {
 
 	/**
 	 * 

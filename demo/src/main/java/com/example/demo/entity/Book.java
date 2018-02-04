@@ -18,7 +18,7 @@ import javax.persistence.ManyToOne;
 // }
 // )
 // public class Book implements BookInterface {
-public class Book implements Serializable {
+public class Book extends History implements Serializable {
 
 	private static final long serialVersionUID = -9019470250770543773L;
 
