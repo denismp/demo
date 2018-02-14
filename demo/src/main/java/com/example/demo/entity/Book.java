@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -30,8 +32,8 @@ public class Book extends History implements Serializable {
 	private String title;
 
 
-	@ManyToOne(fetch=FetchType.LAZY)
-	private Author author;
+	@ManyToMany(fetch=FetchType.LAZY)
+	private Set<Author> authors;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	private User user;
@@ -78,49 +80,19 @@ public class Book extends History implements Serializable {
 
 	}
 
-	/**
-	 * @return the author
-	 */
-	public Author getAuthor() {
-		return author;
-	}
-
-	/**
-	 * @param author the author to set
-	 */
-	public void setAuthor(Author author) {
-		this.author = author;
-	}
 	
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
+	/**
+	 * @return the authors
 	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((title == null) ? 0 : title.hashCode());
-		return result;
+	public Set<Author> getAuthors() {
+		return authors;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
+	/**
+	 * @param authors the authors to set
 	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Book other = (Book) obj;
-		if (title == null) {
-			if (other.title != null)
-				return false;
-		} else if (!title.equals(other.title))
-			return false;
-		return true;
+	public void setAuthors(Set<Author> authors) {
+		this.authors = authors;
 	}
 
 }
