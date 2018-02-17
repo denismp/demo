@@ -19,6 +19,7 @@ import com.example.demo.service.UserService;
 
 
 @RestController
+@RequestMapping( value = "/" )
 public class UserController {
 	private final Logger log = Logger.getLogger (this.getClass());
 	
@@ -27,15 +28,15 @@ public class UserController {
 	
 	@ResponseBody
 	@RequestMapping(value = { "/users" }, method = { RequestMethod.GET })
-	public ResponseEntity<List<User>> getStudents() {
-		log.info("getStudents(): Called...");
+	public ResponseEntity<List<User>> getUsers() {
+		log.info("getUsers(): Called...");
 
 		List<User> users = null;
 
 		users = this.userService.findAll();
 
 		if (users == null || users.isEmpty()) {
-			log.info("getStudents(): returned a null or empty list."); 
+			log.info("getUsers(): returned a null or empty list."); 
 			ResponseEntity<List<User>> rVal = new ResponseEntity<List<User>>(users, HttpStatus.NO_CONTENT);
 			return rVal;
 		}
@@ -43,7 +44,7 @@ public class UserController {
 	}
 	
 	@ResponseBody
-	@RequestMapping( value = {"/get-by-email/{email}"}, method = { RequestMethod.GET})
+	@RequestMapping( value = {"/user/get-by-email/{email}"}, method = { RequestMethod.GET})
 	public ResponseEntity<User> getUser( @PathVariable String email ){
 		User user = null;
 		try{
@@ -57,7 +58,7 @@ public class UserController {
 	}
 	
 	@ResponseBody
-	@RequestMapping( value = {"/create/{email}/{name}"}, method = { RequestMethod.POST})
+	@RequestMapping( value = {"/create/user/{email}/{name}"}, method = { RequestMethod.POST})
 	public ResponseEntity<User> createUser( @PathVariable String email, @PathVariable String name ){
 		User user = null;
 		try{
@@ -90,7 +91,7 @@ public class UserController {
 	}
 	
 	@ResponseBody
-	@RequestMapping( value = {"/update/{id}/{email}/{name}"}, method = { RequestMethod.PUT})
+	@RequestMapping( value = {"/update/user/{id}/{email}/{name}"}, method = { RequestMethod.PUT})
 	public ResponseEntity<User> updateUser( @PathVariable long id, @PathVariable String email, @PathVariable String name  ){
 		User user = null;
 		try{

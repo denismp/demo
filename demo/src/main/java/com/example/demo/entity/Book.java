@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
 // @Table(name = "book")
@@ -20,6 +22,11 @@ import javax.persistence.ManyToOne;
 // }
 // )
 // public class Book implements BookInterface {
+@Table(
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"title"})
+        }
+)
 public class Book extends History implements Serializable {
 
 	private static final long serialVersionUID = -9019470250770543773L;

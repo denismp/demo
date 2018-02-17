@@ -4,6 +4,7 @@
 package com.example.demo.dao;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -24,5 +25,5 @@ public interface BookDao extends JpaRepository<Book, Long> {
 //	public List<Book> getByAuthor( String author );
     
     @Query("SELECT b FROM Book b WHERE b.title = ?1")
-	public List<Book> getByTitle( String title );
+	public Set<Book> getByTitle( String title );
 }

@@ -4,6 +4,7 @@
 package com.example.demo.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import com.example.demo.service.BookService;
  *
  */
 @RestController
+@RequestMapping( value = "/" )
 public class BookController {
 	private final Logger log = Logger.getLogger (this.getClass());
 	
@@ -47,42 +49,42 @@ public class BookController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = { "/books/{author}" }, method = { RequestMethod.GET })
-	public ResponseEntity<List<Book>> getBooksByAuthor(@PathVariable String author) {
+	@RequestMapping(value = { "/books/author/{name}" }, method = { RequestMethod.GET })
+	public ResponseEntity<Set<Book>> getBooksByAuthor(@PathVariable String name) {
 		log.info("getBooksByAuthor(): Called...");
 
-		List<Book> books = null;
+		Set<Book> books = null;
 
-		books = this.bookService.getByAuthorName(author);
+		books = this.bookService.getByAuthorName(name);
 
 		if (books == null || books.isEmpty()) {
 			log.info("getBooksByAuthor(): returned a null or empty list."); 
-			ResponseEntity<List<Book>> rVal = new ResponseEntity<List<Book>>(books, HttpStatus.NO_CONTENT);
+			ResponseEntity<Set<Book>> rVal = new ResponseEntity<Set<Book>>(books, HttpStatus.NO_CONTENT);
 			return rVal;
 		}
-		return new ResponseEntity<List<Book>>(books, HttpStatus.OK);
+		return new ResponseEntity<Set<Book>>(books, HttpStatus.OK);
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = { "/books/{title}" }, method = { RequestMethod.GET })
-	public ResponseEntity<List<Book>> getBooksByTitle(@PathVariable String title) {
+	public ResponseEntity<Set<Book>> getBooksByTitle(@PathVariable String title) {
 		log.info("getBooksByTitle(): Called...");
 
-		List<Book> books = null;
+		Set<Book> books = null;
 
 		books = this.bookService.getByTitle(title);
 
 		if (books == null || books.isEmpty()) {
 			log.info("getBooksByTitle(): returned a null or empty list."); 
-			ResponseEntity<List<Book>> rVal = new ResponseEntity<List<Book>>(books, HttpStatus.NO_CONTENT);
+			ResponseEntity<Set<Book>> rVal = new ResponseEntity<Set<Book>>(books, HttpStatus.NO_CONTENT);
 			return rVal;
 		}
-		return new ResponseEntity<List<Book>>(books, HttpStatus.OK);
+		return new ResponseEntity<Set<Book>>(books, HttpStatus.OK);
 	}
 	
 	
 	@ResponseBody
-	@RequestMapping( value = {"/create/{title}/{author}"}, method = { RequestMethod.POST})
+	@RequestMapping( value = {"/create/book/{title}/{author}"}, method = { RequestMethod.POST})
 	public ResponseEntity<Book> createBook( @PathVariable String title, @PathVariable String author ){
 		Book book = null;
 		try{
@@ -115,7 +117,7 @@ public class BookController {
 	}
 	
 	@ResponseBody
-	@RequestMapping( value = {"/update/{id}/{title}/{author}"}, method = { RequestMethod.PUT})
+	@RequestMapping( value = {"/update/book/{id}/{title}/{author}"}, method = { RequestMethod.PUT})
 	public ResponseEntity<Book> updateBook( @PathVariable long id, @PathVariable String title, @PathVariable String author  ){
 		Book book = null;
 		try{
@@ -135,4 +137,24 @@ public class BookController {
 		return new ResponseEntity<Book>(book, HttpStatus.OK);
 	}
 
+	@ResponseBody
+	@RequestMapping( value = {"/update/book/{id}/{email}/{user}"}, method = { RequestMethod.PUT})
+	public ResponseEntity<Book> updateBookUser( @PathVariable long id, @PathVariable String email, @PathVariable String user ){
+		Book book = null;
+		try{
+			book = bookService.findOne(id);
+			if( book == null ){
+				log.info("Book not found for id=" + id );
+				ResponseEntity<Book> rVal = new ResponseEntity<Book>(book, HttpStatus.NO_CONTENT);
+				return rVal;
+			}else{
+				book = bookService.updateBookUser(id, email, user);
+			}
+		}catch( Exception e ) {
+			log.error("Error updating the book: " + e.toString());
+			ResponseEntity<Book> rVal = new ResponseEntity<Book>(book, HttpStatus.BAD_REQUEST);
+			return rVal;
+		}
+		return new ResponseEntity<Book>(book, HttpStatus.OK);
+	}
 }
