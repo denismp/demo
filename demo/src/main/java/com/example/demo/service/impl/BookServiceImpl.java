@@ -3,6 +3,7 @@
  */
 package com.example.demo.service.impl;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -17,11 +18,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.dao.AuthorDao;
 import com.example.demo.dao.BookDao;
-import com.example.demo.dao.UserDao;
 import com.example.demo.entity.Author;
 import com.example.demo.entity.Book;
 import com.example.demo.entity.User;
+import com.example.demo.service.AuthorService;
 import com.example.demo.service.BookService;
+import com.example.demo.service.UserService;
 
 /**
  * @author denisputnam
@@ -42,7 +44,10 @@ public class BookServiceImpl implements BookService {
 	private AuthorDao authorDao;
 	
 	@Autowired
-	private UserDao userDao;
+	private UserService userService;
+	
+	@Autowired
+	private AuthorService authorService;
 
 
 	/* (non-Javadoc)
@@ -67,12 +72,14 @@ public class BookServiceImpl implements BookService {
 				authors = new HashSet<Author>();
 				Author myAuthor = new Author();
 				myAuthor.setName(author);
-				myAuthor = this.authorDao.saveAndFlush(myAuthor);
+				myAuthor = this.authorService.create(author);
+//				myAuthor = this.authorDao.saveAndFlush(myAuthor);
 				authors.add(myAuthor);
 			}
 			book.setAuthors(new HashSet<Author>(authors));
 			
-			this.bookDao.saveAndFlush(book);
+//			this.bookDao.saveAndFlush(book);
+			book = this.create(book);
 		}catch( Exception e ) {
 			log.error("Error creating book: " + e.getMessage());
 			throw new Exception(e);
@@ -95,12 +102,16 @@ public class BookServiceImpl implements BookService {
 				authors = new HashSet<Author>();
 				Author myAuthor = new Author();
 				myAuthor.setName(author);
-				this.authorDao.saveAndFlush(myAuthor);
+				myAuthor = this.authorService.create(author);
+//				this.authorDao.saveAndFlush(myAuthor);
 				authors.add(myAuthor);
+			} else {
+				authors.addAll(this.authorDao.getByName(author));
 			}
 			book.setAuthors(authors);
 
-			bookDao.saveAndFlush(book);
+//			bookDao.saveAndFlush(book);
+			book = this.update(book);
 		}catch( Exception e ){
 			log.error("Error updating the book: " + e.getMessage());
 			throw new Exception(e);
@@ -165,18 +176,40 @@ public class BookServiceImpl implements BookService {
 				user = new User();
 				user.setEmail(userEmail);
 				user.setName( name );
-				user = this.userDao.saveAndFlush(user);
+				user = this.userService.create(user);
+//				user = this.userDao.saveAndFlush(user);
+			} else {
+				user = this.userService.getByEmail(userEmail);
 			}
 			Set<Book> books = user.getBooks();
 			books.add(book);
 			user.setBooks(books);
 			book.setUser(user);
 			
-			bookDao.saveAndFlush(book);
+			book = this.update(book);
+//			bookDao.saveAndFlush(book);
 		}catch( Exception e ){
 			log.error("Error updating the book: " + e.getMessage());
 			throw new Exception(e);
 		}
+		return book;
+	}
+
+	@Override
+	public Book create(Book book) throws Exception {
+		book.setCreatedDate(new Date());
+		book.setUpdatedDate(book.getCreatedDate());
+		book.setCreatedBy("demo");
+		book.setUpdatedBy(book.getCreatedBy());
+		book = this.bookDao.saveAndFlush(book);
+		return book;
+	}
+
+	@Override
+	public Book update(Book book) throws Exception {
+		book.setUpdatedDate(new Date());
+		book.setUpdatedBy("demo");
+		book = this.bookDao.saveAndFlush(book);
 		return book;
 	}
 

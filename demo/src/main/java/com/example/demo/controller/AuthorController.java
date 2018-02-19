@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -91,6 +92,24 @@ public class AuthorController {
 			author = authorService.create(name, title);
 			if( author.getId() == 0 ){
 				log.error("Author already exists for: " + name);
+				ResponseEntity<Author> rVal = new ResponseEntity<Author>(author, HttpStatus.BAD_REQUEST);
+				return rVal;				
+			}
+		}catch( Exception e ) {
+			log.error("Error creating the book: " + e.toString());
+			ResponseEntity<Author> rVal = new ResponseEntity<Author>(author, HttpStatus.BAD_REQUEST);
+			return rVal;
+		}
+		return new ResponseEntity<Author>(author, HttpStatus.OK);
+	}
+
+	@ResponseBody
+	@RequestMapping( value = {"/create/author"}, method = { RequestMethod.POST})
+	public ResponseEntity<Author> createAuthor(@RequestBody Author author ){
+		try{
+			author = authorService.create(author);
+			if( author.getId() == 0 ){
+				log.error("Author already exists for: " + author.getName());
 				ResponseEntity<Author> rVal = new ResponseEntity<Author>(author, HttpStatus.BAD_REQUEST);
 				return rVal;				
 			}

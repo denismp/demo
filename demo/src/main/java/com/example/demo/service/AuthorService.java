@@ -14,6 +14,8 @@ import com.example.demo.entity.Author;
  */
 public interface AuthorService {
 	public Set<Author> getByAuthorName( String name );
+	public Author create( Author author ) throws Exception;
+	public Author update( Author author ) throws Exception;
 	public Author create( String name ) throws Exception;
 	public Author create( String name, String bookTitle ) throws Exception;
 	public Author updateAuthor( Long id, String name ) throws Exception;

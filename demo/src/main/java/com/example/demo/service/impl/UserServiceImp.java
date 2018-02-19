@@ -3,6 +3,7 @@
  */
 package com.example.demo.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -100,6 +101,24 @@ public class UserServiceImp implements UserService {
 	@Override
 	public User findOne(Long id) {
 		return this.userDao.findOne(id);
+	}
+
+	@Override
+	public User create(User user) throws Exception {
+		user.setCreatedDate(new Date());
+		user.setUpdatedDate(user.getCreatedDate());
+		user.setCreatedBy("demo");
+		user.setUpdatedBy(user.getCreatedBy());
+		user = this.userDao.saveAndFlush(user);
+		return user;
+	}
+
+	@Override
+	public User update(User user) throws Exception {
+		user.setUpdatedDate(new Date());
+		user.setUpdatedBy("demo");
+		user = this.userDao.saveAndFlush(user);
+		return user;
 	}
 
 

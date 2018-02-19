@@ -4,6 +4,7 @@
 package com.example.demo.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -21,6 +22,7 @@ import com.example.demo.dao.BookDao;
 import com.example.demo.entity.Author;
 import com.example.demo.entity.Book;
 import com.example.demo.service.AuthorService;
+import com.example.demo.service.BookService;
 
 /**
  * @author denisputnam
@@ -40,6 +42,9 @@ public class AuthorServiceImpl implements AuthorService {
 	
 	@Autowired
 	private BookDao bookDao;
+	
+	@Autowired
+	private BookService bookService;
 
 	/* (non-Javadoc)
 	 * @see com.example.demo.service.AuthorService#getByAuthorName(java.lang.String)
@@ -58,7 +63,8 @@ public class AuthorServiceImpl implements AuthorService {
 		try {
 			author = new Author();
 			author.setName(name);
-			this.authorDao.saveAndFlush(author);
+			author = this.create(author);
+//			this.authorDao.saveAndFlush(author);
 		}catch( Exception e ) {
 			log.error("Error creating author: " + e.getMessage());
 			throw new Exception(e);
@@ -76,7 +82,8 @@ public class AuthorServiceImpl implements AuthorService {
 		try{
 			author = authorDao.findOne(id);
 			author.setName(name);
-			authorDao.saveAndFlush(author);
+			author = this.update(author);
+//			authorDao.saveAndFlush(author);
 		}catch( Exception e ){
 			log.error("Error updating the author: " + e.getMessage());
 			throw new Exception(e);
@@ -138,17 +145,36 @@ public class AuthorServiceImpl implements AuthorService {
 				books = new HashSet<Book>();
 				Book myBook = new Book();
 				myBook.setTitle(title);
-				myBook = this.bookDao.saveAndFlush(myBook);
+				myBook = this.bookService.update(myBook);
+//				myBook = this.bookDao.saveAndFlush(myBook);
 				books.add(myBook);
 			}
 			author.setBooks(books);
 			
-			this.authorDao.saveAndFlush(author);
+			this.create(author);
 		}catch( Exception e ) {
 			log.error("Error creating author: " + e.getMessage());
 			throw new Exception(e);
 		}
 
+		return author;
+	}
+
+	@Override
+	public Author create(Author author) throws Exception {
+		author.setCreatedDate(new Date());
+		author.setUpdatedDate(author.getCreatedDate());
+		author.setCreatedBy("demo");
+		author.setUpdatedBy(author.getCreatedBy());
+		author = this.authorDao.saveAndFlush(author);
+		return author;
+	}
+
+	@Override
+	public Author update(Author author) throws Exception {
+		author.setUpdatedBy("demo");
+		author.setUpdatedDate(new Date());
+		author = this.authorDao.saveAndFlush(author);
 		return author;
 	}
 

@@ -13,6 +13,8 @@ import com.example.demo.entity.User;
  */
 public interface UserService {
 	public User getByEmail( String email ) throws Exception;
+	public User create( User user ) throws Exception;
+	public User update( User user ) throws Exception;
 	public User create( String email, String name ) throws Exception;
 	public User updateUser( Long id, String email, String name ) throws Exception;
 	public User delete( Long id ) throws Exception;
