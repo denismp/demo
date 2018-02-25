@@ -62,11 +62,8 @@ public class BookServiceImpl implements BookService {
 	 * @see com.example.demo.service.BookService#create(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public Book create(String title, String author) throws Exception {
-		Book book = null;
+	public Book create(String author, Book book) throws Exception {
 		try {
-			book = new Book();
-			book.setTitle(title);
 			Set<Author> authors = this.authorDao.getByName(author);
 			if( authors == null || authors.isEmpty() == true ) {
 				authors = new HashSet<Author>();

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -84,13 +85,13 @@ public class BookController {
 	
 	
 	@ResponseBody
-	@RequestMapping( value = {"/create/book/{title}/{author}"}, method = { RequestMethod.POST})
-	public ResponseEntity<Book> createBook( @PathVariable String title, @PathVariable String author ){
-		Book book = null;
+	@RequestMapping( value = {"/create/book/{author}"}, method = { RequestMethod.POST})
+	public ResponseEntity<Book> createBook( @PathVariable String author, @RequestBody Book book ){
+		log.info("createBook(): called with author=" + author);
 		try{
-			book = bookService.create(title, author);
-			if( book.getId() == 0 ){
-				log.error("Book already exists for: " + title);
+			book = bookService.create(author, book);
+			if( book.getId() == 0L ){
+				log.error("Book already exists for: " + author);
 				ResponseEntity<Book> rVal = new ResponseEntity<Book>(book, HttpStatus.BAD_REQUEST);
 				return rVal;				
 			}
@@ -99,6 +100,7 @@ public class BookController {
 			ResponseEntity<Book> rVal = new ResponseEntity<Book>(book, HttpStatus.BAD_REQUEST);
 			return rVal;
 		}
+		log.info("createBoo(): successfully create the book.");
 		return new ResponseEntity<Book>(book, HttpStatus.OK);
 	}
 	

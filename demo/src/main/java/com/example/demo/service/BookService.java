@@ -16,7 +16,7 @@ public interface BookService {
 	public Set<Book> getByTitle( String title );
 	public Book create( Book book ) throws Exception;
 	public Book update( Book book ) throws Exception;
-	public Book create( String title, String author ) throws Exception;
+	public Book create( String author, Book book ) throws Exception;
 	public Book updateBook( Long id, String title, String author ) throws Exception;
 	public Book delete( Long id ) throws Exception;
 	public List<Book> findAll();

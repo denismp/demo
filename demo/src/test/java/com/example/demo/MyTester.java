@@ -31,7 +31,15 @@ public class MyTester {
 	private void createAuthor( String url, String name ) throws Exception {
 		JSONObject json = new JSONObject();
 		
-		json.put("name", "name1");
+		json.put("name", name);
+		this.sendPost(url, json);	
+	}
+	
+	private void createBook( String url, String title, String author ) throws Exception {
+		JSONObject json = new JSONObject();
+		
+		json.put("title", title);
+		json.put("author", author);
 		this.sendPost(url, json);	
 	}
 	
@@ -147,7 +155,9 @@ public class MyTester {
 		// TODO Auto-generated method stub
 		MyTester tester = new MyTester();
 		
-		tester.createAuthor("http://localhost:8090/create/author", "name1");
+//		tester.createAuthor("http://localhost:8090/create/author", "name1");
+		
+		tester.createBook("http://localhost:8090/create/book", "title1", "name1");
 
 	}
 
