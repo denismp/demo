@@ -77,6 +77,18 @@ public class BookServiceImpl implements BookService {
 			
 //			this.bookDao.saveAndFlush(book);
 			book = this.create(book);
+			for( Author myAuthor: authors ) {
+				Set<Book> books = myAuthor.getBooks();
+				if( books == null ) {
+					books = new HashSet<Book>();
+					books.add(book);
+					myAuthor.setBooks(books);
+				} else {
+					books.add(book);
+					myAuthor.setBooks(books);
+				}
+				this.authorDao.saveAndFlush(myAuthor);
+			}
 		}catch( Exception e ) {
 			log.error("Error creating book: " + e.getMessage());
 			throw new Exception(e);

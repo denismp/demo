@@ -38,7 +38,6 @@
 <fullyQualifiedTypeName name="java.util.HashSet"/>
 <fullyQualifiedTypeName name="java.util.Set"/>
 <fullyQualifiedTypeName name="com.example.demo.entity.User"/>
-<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestBody"/>
 <fullyQualifiedTypeName name="java.util.Date"/>
 <fullyQualifiedTypeName name="com.example.demo.service.BookService"/>
 <fullyQualifiedTypeName name="com.example.demo.service.UserService"/>
@@ -60,4 +59,5 @@
 <fullyQualifiedTypeName name="org.springframework.web.cors.UrlBasedCorsConfigurationSource"/>
 <fullyQualifiedTypeName name="org.springframework.web.cors.CorsConfiguration"/>
 <fullyQualifiedTypeName name="org.springframework.web.filter.CorsFilter"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestBody"/>
 </qualifiedTypeNameHistroy>

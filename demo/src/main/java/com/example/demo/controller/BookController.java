@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.Book;
 import com.example.demo.service.BookService;
+import com.example.demo.view.model.BookView;
+import com.example.demo.view.service.BookViewService;
 
 /**
  * @author denisputnam
@@ -31,6 +33,9 @@ public class BookController {
 	
 	@Autowired
 	private BookService bookService;
+	
+	@Autowired
+	private BookViewService bookViewService;
 	
 	@ResponseBody
 	@RequestMapping(value = { "/books" }, method = { RequestMethod.GET })
@@ -86,22 +91,24 @@ public class BookController {
 	
 	@ResponseBody
 	@RequestMapping( value = {"/create/book/{author}"}, method = { RequestMethod.POST})
-	public ResponseEntity<Book> createBook( @PathVariable String author, @RequestBody Book book ){
+	public ResponseEntity<BookView> createBook( @PathVariable String author, @RequestBody Book book ){
 		log.info("createBook(): called with author=" + author);
+		BookView bookView = null;
 		try{
 			book = bookService.create(author, book);
 			if( book.getId() == 0L ){
 				log.error("Book already exists for: " + author);
-				ResponseEntity<Book> rVal = new ResponseEntity<Book>(book, HttpStatus.BAD_REQUEST);
+				ResponseEntity<BookView> rVal = new ResponseEntity<BookView>(bookView, HttpStatus.BAD_REQUEST);
 				return rVal;				
 			}
+			bookView = this.bookViewService.convertBook(book);
 		}catch( Exception e ) {
 			log.error("Error creating the book: " + e.toString());
-			ResponseEntity<Book> rVal = new ResponseEntity<Book>(book, HttpStatus.BAD_REQUEST);
+			ResponseEntity<BookView> rVal = new ResponseEntity<BookView>(bookView, HttpStatus.BAD_REQUEST);
 			return rVal;
 		}
-		log.info("createBoo(): successfully create the book.");
-		return new ResponseEntity<Book>(book, HttpStatus.OK);
+		log.info("createBook(): successfully created the book.");
+		return new ResponseEntity<BookView>(bookView, HttpStatus.OK);
 	}
 	
 	@ResponseBody
