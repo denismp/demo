@@ -23,7 +23,20 @@ public class BookView extends History {
 	private String title;
 	private Set<AuthorFromBookView> authors;
 	private User user;
+	private Date publishDate;
 	
+	/**
+	 * @return the publishDate
+	 */
+	public Date getPublishDate() {
+		return publishDate;
+	}
+	/**
+	 * @param publishDate the publishDate to set
+	 */
+	public void setPublishDate(Date publishDate) {
+		this.publishDate = publishDate;
+	}
 	/**
 	 * @return the id
 	 */

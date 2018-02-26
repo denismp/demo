@@ -20,6 +20,21 @@ public class BookFromAuthorView extends History {
 	private Long id;
 	private String title;
 	private User user;
+	private Date publishDate;
+
+	/**
+	 * @return the publishDate
+	 */
+	public Date getPublishDate() {
+		return publishDate;
+	}
+
+	/**
+	 * @param publishDate the publishDate to set
+	 */
+	public void setPublishDate(Date publishDate) {
+		this.publishDate = publishDate;
+	}
 
 	/**
 	 * @return the id

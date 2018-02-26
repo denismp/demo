@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -37,6 +38,8 @@ public class Book extends History implements Serializable {
 
 	@Column
 	private String title;
+	
+	private Date publishDate;
 
 
 	@ManyToMany(fetch=FetchType.LAZY)
@@ -44,6 +47,20 @@ public class Book extends History implements Serializable {
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	private User user;
+
+	/**
+	 * @return the publishDate
+	 */
+	public Date getPublishDate() {
+		return publishDate;
+	}
+
+	/**
+	 * @param publishDate the publishDate to set
+	 */
+	public void setPublishDate(Date publishDate) {
+		this.publishDate = publishDate;
+	}
 
 	/**
 	 * @return the user

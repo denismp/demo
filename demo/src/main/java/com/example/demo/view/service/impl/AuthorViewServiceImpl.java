@@ -45,6 +45,7 @@ public class AuthorViewServiceImpl implements AuthorViewService {
 			bookFromAuthorView.setUpdatedBy(book.getUpdatedBy());
 			bookFromAuthorView.setUpdatedDate(book.getUpdatedDate());
 			bookFromAuthorView.setUser(book.getUser());
+			bookFromAuthorView.setPublishDate(book.getPublishDate());
 			books.add(bookFromAuthorView);
 		}
 		viewObject.setBooks(books);

@@ -36,6 +36,7 @@ public class BookViewServiceImpl implements BookViewService {
 		viewObject.setUpdatedBy(book.getUpdatedBy());
 		viewObject.setUpdatedDate(book.getUpdatedDate());
 		viewObject.setUser(book.getUser());
+		viewObject.setPublishDate(book.getPublishDate());
 		Set<AuthorFromBookView> authors = new HashSet<AuthorFromBookView>();
 		for( Author author: book.getAuthors() ) {
 			AuthorFromBookView authorFromBookView = new AuthorFromBookView();
