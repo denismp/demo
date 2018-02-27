@@ -58,8 +58,23 @@ public class BookViewServiceImpl implements BookViewService {
 	@Override
 	public List<BookView> convertBookList(List<Book> list) {
 		List<BookView> viewList = new ArrayList<BookView>();
+				
+		List<Book> dedupList = new ArrayList<Book>(new HashSet<Book>(list));
 		
-		for( Book book: list ) {
+		for( Book book: dedupList ) {
+			BookView viewObject = this.convertBook(book);
+			
+			viewList.add(viewObject);
+		}
+
+		return viewList;
+	}
+
+	@Override
+	public List<BookView> convertBookList(Set<Book> books) {
+		List<BookView> viewList = new ArrayList<BookView>();
+		
+		for( Book book: books ) {
 			BookView viewObject = this.convertBook(book);
 			
 			viewList.add(viewObject);

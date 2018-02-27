@@ -39,53 +39,57 @@ public class BookController {
 	
 	@ResponseBody
 	@RequestMapping(value = { "/books" }, method = { RequestMethod.GET })
-	public ResponseEntity<List<Book>> getBooks() {
+	public ResponseEntity<List<BookView>> getBooks() {
 		log.info("getBooks(): Called...");
 
 		List<Book> books = null;
+		List<BookView> bookViewList = null;
 
 		books = this.bookService.findAll();
+		bookViewList = this.bookViewService.convertBookList(books);
 
 		if (books == null || books.isEmpty()) {
 			log.info("getBooks(): returned a null or empty list."); 
-			ResponseEntity<List<Book>> rVal = new ResponseEntity<List<Book>>(books, HttpStatus.NO_CONTENT);
+			ResponseEntity<List<BookView>> rVal = new ResponseEntity<List<BookView>>(bookViewList, HttpStatus.NO_CONTENT);
 			return rVal;
 		}
-		return new ResponseEntity<List<Book>>(books, HttpStatus.OK);
+		return new ResponseEntity<List<BookView>>(bookViewList, HttpStatus.OK);
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = { "/books/author/{name}" }, method = { RequestMethod.GET })
-	public ResponseEntity<Set<Book>> getBooksByAuthor(@PathVariable String name) {
+	public ResponseEntity<List<BookView>> getBooksByAuthor(@PathVariable String name) {
 		log.info("getBooksByAuthor(): Called...");
 
 		Set<Book> books = null;
 
 		books = this.bookService.getByAuthorName(name);
+		List<BookView> bookViewList = this.bookViewService.convertBookList(books);
 
 		if (books == null || books.isEmpty()) {
 			log.info("getBooksByAuthor(): returned a null or empty list."); 
-			ResponseEntity<Set<Book>> rVal = new ResponseEntity<Set<Book>>(books, HttpStatus.NO_CONTENT);
+			ResponseEntity<List<BookView>> rVal = new ResponseEntity<List<BookView>>(bookViewList, HttpStatus.NO_CONTENT);
 			return rVal;
 		}
-		return new ResponseEntity<Set<Book>>(books, HttpStatus.OK);
+		return new ResponseEntity<List<BookView>>(bookViewList, HttpStatus.OK);
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = { "/books/{title}" }, method = { RequestMethod.GET })
-	public ResponseEntity<Set<Book>> getBooksByTitle(@PathVariable String title) {
+	public ResponseEntity<List<BookView>> getBooksByTitle(@PathVariable String title) {
 		log.info("getBooksByTitle(): Called...");
 
 		Set<Book> books = null;
 
 		books = this.bookService.getByTitle(title);
+		List<BookView> bookViewList = this.bookViewService.convertBookList(books);
 
 		if (books == null || books.isEmpty()) {
 			log.info("getBooksByTitle(): returned a null or empty list."); 
-			ResponseEntity<Set<Book>> rVal = new ResponseEntity<Set<Book>>(books, HttpStatus.NO_CONTENT);
+			ResponseEntity<List<BookView>> rVal = new ResponseEntity<List<BookView>>(bookViewList, HttpStatus.NO_CONTENT);
 			return rVal;
 		}
-		return new ResponseEntity<Set<Book>>(books, HttpStatus.OK);
+		return new ResponseEntity<List<BookView>>(bookViewList, HttpStatus.OK);
 	}
 	
 	

@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.Author;
 import com.example.demo.service.AuthorService;
+import com.example.demo.view.model.AuthorView;
+import com.example.demo.view.service.AuthorViewService;
 
 /**
  * @author denisputnam
@@ -32,55 +34,62 @@ public class AuthorController {
 	@Autowired
 	private AuthorService authorService;
 	
+	@Autowired
+	private AuthorViewService authorViewService;
+	
 	@ResponseBody
 	@RequestMapping(value = { "/authors" }, method = { RequestMethod.GET })
-	public ResponseEntity<List<Author>> getAuthors() {
+	public ResponseEntity<List<AuthorView>> getAuthors() {
 		log.info("getAuthors(): Called...");
 
 		List<Author> authors = null;
 
+
 		authors = this.authorService.findAll();
+		List<AuthorView> authorViewList = this.authorViewService.convertAuthorList(authors);
 
 		if (authors == null || authors.isEmpty()) {
 			log.info("getAuthors(): returned a null or empty list."); 
-			ResponseEntity<List<Author>> rVal = new ResponseEntity<List<Author>>(authors, HttpStatus.NO_CONTENT);
+			ResponseEntity<List<AuthorView>> rVal = new ResponseEntity<List<AuthorView>>(authorViewList, HttpStatus.NO_CONTENT);
 			return rVal;
 		}
-		return new ResponseEntity<List<Author>>(authors, HttpStatus.OK);
+		return new ResponseEntity<List<AuthorView>>(authorViewList, HttpStatus.OK);
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = { "/authors/books/{title}" }, method = { RequestMethod.GET })
-	public ResponseEntity<List<Author>> getAuthorsByBook(@PathVariable String title) {
+	public ResponseEntity<List<AuthorView>> getAuthorsByBook(@PathVariable String title) {
 		log.info("getAuthorsByBook(): Called...");
 
 		List<Author> authors = null;
 
 		authors = this.authorService.getAuthorsByBook(title);
+		List<AuthorView> authorViewList = this.authorViewService.convertAuthorList(authors);
 
 		if (authors == null || authors.isEmpty()) {
 			log.info("getAuthorsByBook(): returned a null or empty list."); 
-			ResponseEntity<List<Author>> rVal = new ResponseEntity<List<Author>>(authors, HttpStatus.NO_CONTENT);
+			ResponseEntity<List<AuthorView>> rVal = new ResponseEntity<List<AuthorView>>(authorViewList, HttpStatus.NO_CONTENT);
 			return rVal;
 		}
-		return new ResponseEntity<List<Author>>(authors, HttpStatus.OK);
+		return new ResponseEntity<List<AuthorView>>(authorViewList, HttpStatus.OK);
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = { "/authors/name/{name}" }, method = { RequestMethod.GET })
-	public ResponseEntity<Set<Author>> getAuthorsByName(@PathVariable String name) {
+	public ResponseEntity<List<AuthorView>> getAuthorsByName(@PathVariable String name) {
 		log.info("getAuthorsByName(): Called...");
 
 		Set<Author> authors = null;
 
 		authors = this.authorService.getByAuthorName(name);
+		List<AuthorView> authorViewList = this.authorViewService.convertAuthorList(authors);
 
 		if (authors == null || authors.isEmpty()) {
 			log.info("getBooksByTitle(): returned a null or empty list."); 
-			ResponseEntity<Set<Author>> rVal = new ResponseEntity<Set<Author>>(authors, HttpStatus.NO_CONTENT);
+			ResponseEntity<List<AuthorView>> rVal = new ResponseEntity<List<AuthorView>>(authorViewList, HttpStatus.NO_CONTENT);
 			return rVal;
 		}
-		return new ResponseEntity<Set<Author>>(authors, HttpStatus.OK);
+		return new ResponseEntity<List<AuthorView>>(authorViewList, HttpStatus.OK);
 	}
 
 //	create(String name, String title) 

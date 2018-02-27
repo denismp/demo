@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -41,7 +42,7 @@ public class Author extends History implements Serializable {
 	@NotNull
 	private String name;
 	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="authors")
+	@ManyToMany(fetch=FetchType.LAZY, mappedBy="authors")
 	private Set<Book> books;
 
 	public Long getId() {

@@ -60,6 +60,20 @@ public class AuthorViewServiceImpl implements AuthorViewService {
 	public List<AuthorView> convertAuthorList(List<Author> authors) {
 		List<AuthorView> viewList = new ArrayList<AuthorView>();
 		
+		List<Author> dedupList = new ArrayList<Author>(new HashSet<Author>(authors));
+		
+		for( Author author: dedupList ) {
+			AuthorView viewObject = this.convertAuthor(author);
+			viewList.add(viewObject);
+		}
+		
+		return viewList;
+	}
+
+	@Override
+	public List<AuthorView> convertAuthorList(Set<Author> authors) {
+		List<AuthorView> viewList = new ArrayList<AuthorView>();
+		
 		for( Author author: authors ) {
 			AuthorView viewObject = this.convertAuthor(author);
 			viewList.add(viewObject);
