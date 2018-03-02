@@ -78,67 +78,37 @@ public class BookFromAuthorView extends History {
 		this.user = user;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.example.demo.view.History#getCreatedBy()
-	 */
 	@Override
 	public String getCreatedBy() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.createdBy;
 	}
-
-	/* (non-Javadoc)
-	 * @see com.example.demo.view.History#getCreatedDate()
-	 */
 	@Override
 	public Date getCreatedDate() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.createdDate;
 	}
-
-	/* (non-Javadoc)
-	 * @see com.example.demo.view.History#setCreatedDate(java.util.Date)
-	 */
 	@Override
 	public void setCreatedDate(Date createdDate) {
-		// TODO Auto-generated method stub
-
+		this.createdDate = createdDate;
 	}
-
-	/* (non-Javadoc)
-	 * @see com.example.demo.view.History#getUpdatedBy()
-	 */
 	@Override
 	public String getUpdatedBy() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.updatedBy;
 	}
-
-	/* (non-Javadoc)
-	 * @see com.example.demo.view.History#setUpdatedBy(java.lang.String)
-	 */
 	@Override
 	public void setUpdatedBy(String updatedBy) {
-		// TODO Auto-generated method stub
-
+		this.updatedBy = updatedBy;		
 	}
-
-	/* (non-Javadoc)
-	 * @see com.example.demo.view.History#getUpdatedDate()
-	 */
 	@Override
 	public Date getUpdatedDate() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.updatedDate;
 	}
-
-	/* (non-Javadoc)
-	 * @see com.example.demo.view.History#setUpdatedDate(java.util.Date)
-	 */
 	@Override
 	public void setUpdatedDate(Date updatedDate) {
-		// TODO Auto-generated method stub
-
+		this.updatedDate = updatedDate;
+	}
+	@Override
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
 	}
 
 }

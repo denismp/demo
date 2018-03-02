@@ -58,38 +58,35 @@ public class AuthorView extends History {
 	}
 	@Override
 	public String getCreatedBy() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.createdBy;
 	}
 	@Override
 	public Date getCreatedDate() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.createdDate;
 	}
 	@Override
 	public void setCreatedDate(Date createdDate) {
-		// TODO Auto-generated method stub
-		
+		this.createdDate = createdDate;
 	}
 	@Override
 	public String getUpdatedBy() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.updatedBy;
 	}
 	@Override
 	public void setUpdatedBy(String updatedBy) {
-		// TODO Auto-generated method stub
-		
+		this.updatedBy = updatedBy;		
 	}
 	@Override
 	public Date getUpdatedDate() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.updatedDate;
 	}
 	@Override
 	public void setUpdatedDate(Date updatedDate) {
-		// TODO Auto-generated method stub
-		
+		this.updatedDate = updatedDate;
+	}
+	@Override
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
 	}
 
 }

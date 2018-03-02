@@ -28,9 +28,7 @@ public abstract class History implements Serializable {
 	/**
 	 * @param createdBy the createdBy to set
 	 */
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
-	}
+	public abstract void setCreatedBy(String createdBy);
 	/**
 	 * @return the createdDate
 	 */
