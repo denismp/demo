@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.entity.Author;
 import com.example.demo.entity.User;
 import com.example.demo.service.UserService;
 
@@ -52,6 +54,37 @@ public class UserController {
 		}catch( Exception e ) {
 			log.error("User not found.");
 			ResponseEntity<User> rVal = new ResponseEntity<User>(user, HttpStatus.NO_CONTENT);
+			return rVal;
+		}
+		return new ResponseEntity<User>(user, HttpStatus.OK);
+	}
+	
+	@ResponseBody
+	@RequestMapping( value = {"/create/user"}, method = { RequestMethod.POST})
+	public ResponseEntity<User> createUser( @RequestBody User user ){
+		boolean error = false;
+		if( user.getEmail() == null ) {
+			error = true;
+			log.error("createUser(): user email cannot be null.");
+		}
+		if( user.getName() == null ) {
+			error = true;
+			log.error("createUser(): user name cannot be null.");
+		}
+		if( error ) {
+			ResponseEntity<User> rVal = new ResponseEntity<User>((User)null, HttpStatus.BAD_REQUEST);
+			return rVal;
+		}
+		try{
+			user = userService.create(user);
+			if( user.getId() == 0 ){
+				log.error("User already exists for: " + user.getEmail());
+				ResponseEntity<User> rVal = new ResponseEntity<User>(user, HttpStatus.BAD_REQUEST);
+				return rVal;				
+			}
+		}catch( Exception e ) {
+			log.error("Error creating the user: " + e.toString());
+			ResponseEntity<User> rVal = new ResponseEntity<User>(user, HttpStatus.BAD_REQUEST);
 			return rVal;
 		}
 		return new ResponseEntity<User>(user, HttpStatus.OK);

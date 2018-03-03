@@ -40,7 +40,55 @@ public class User extends History implements Serializable {
 	
 	@OneToMany(fetch=FetchType.LAZY)
 	Set<Book> books;
-	
+
+
+	/**
+	 * @return the id
+	 */
+	public long getId() {
+		return id;
+	}
+
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(long id) {
+		this.id = id;
+	}
+
+
+	/**
+	 * @return the email
+	 */
+	public String getEmail() {
+		return email;
+	}
+
+
+	/**
+	 * @param email the email to set
+	 */
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
 
 	/**
 	 * @return the books
@@ -55,46 +103,6 @@ public class User extends History implements Serializable {
 	 */
 	public void setBooks(Set<Book> books) {
 		this.books = books;
-	}
-
-
-	/**
-	 * @return the email
-	 */
-	public String getEmail() {
-		return email;
-	}
-
-
-	public long getId() {
-		return id;
-	}
-
-
-	public long setId(long value) {
-		return id = value;
-	}
-
-
-	public String getEMail() {
-		return email;
-	}
-
-
-	public void setEmail(String value) {
-		email = value;
-
-	}
-
-
-	public String getName() {
-		return name;
-	}
-
-
-	public void setName(String value) {
-		name = value;
-
 	}
 
 
