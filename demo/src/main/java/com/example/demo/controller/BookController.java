@@ -170,4 +170,20 @@ public class BookController {
 		}
 		return new ResponseEntity<Book>(book, HttpStatus.OK);
 	}
+	
+	@ResponseBody
+	@RequestMapping( value = {"/update/book"}, method = { RequestMethod.PUT})
+	public ResponseEntity<BookView> updateBook( @RequestBody Book book ){
+		BookView bookView = null;
+		
+		try{
+			book = bookService.update(book);
+			bookView = this.bookViewService.convertBook(book);
+		}catch( Exception e ) {
+			log.error("Error updating the book: " + e.toString());
+			ResponseEntity<BookView> rVal = new ResponseEntity<BookView>(bookView, HttpStatus.BAD_REQUEST);
+			return rVal;
+		}
+		return new ResponseEntity<BookView>(bookView, HttpStatus.OK);
+	}
 }
