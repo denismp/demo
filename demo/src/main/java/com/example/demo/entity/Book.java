@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,6 +15,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+//import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Entity
 // @Table(name = "book")
@@ -76,7 +82,8 @@ public class Book extends History implements Serializable {
 	@ManyToMany(fetch=FetchType.LAZY)
 	private Set<Author> authors;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+//	@JsonProperty(access = Access.READ_ONLY)
+	@ManyToOne(fetch=FetchType.LAZY, cascade = {CascadeType.PERSIST})
 	private User user;
 
 	/**
@@ -96,6 +103,10 @@ public class Book extends History implements Serializable {
 	/**
 	 * @return the user
 	 */
+//	@JsonIgnore
+//	@JsonProperty(access = Access.WRITE_ONLY)
+//	@JsonIgnore
+//	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	public User getUser() {
 		return user;
 	}
@@ -103,6 +114,8 @@ public class Book extends History implements Serializable {
 	/**
 	 * @param user the user to set
 	 */
+
+//	@JsonIgnore
 	public void setUser(User user) {
 		this.user = user;
 	}

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.entity.Author;
 import com.example.demo.entity.User;
 import com.example.demo.service.UserService;
 
@@ -137,6 +136,19 @@ public class UserController {
 				user = userService.updateUser(id, email, name);
 			}
 		}catch( Exception e ) {
+			log.error("Error updating the user: " + e.toString());
+			ResponseEntity<User> rVal = new ResponseEntity<User>(user, HttpStatus.BAD_REQUEST);
+			return rVal;
+		}
+		return new ResponseEntity<User>(user, HttpStatus.OK);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = { "/update/user" }, method = { RequestMethod.PUT })
+	public ResponseEntity<User> updateUser(@RequestBody User user) {
+		try {
+			user = userService.update(user);
+		} catch (Exception e) {
 			log.error("Error updating the user: " + e.toString());
 			ResponseEntity<User> rVal = new ResponseEntity<User>(user, HttpStatus.BAD_REQUEST);
 			return rVal;

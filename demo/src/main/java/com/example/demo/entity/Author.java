@@ -6,6 +6,7 @@ package com.example.demo.entity;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,6 +16,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 /**
  * @author denisputnam
@@ -41,7 +46,9 @@ public class Author extends History implements Serializable {
 	@NotNull
 	private String name;
 	
-	@ManyToMany(fetch=FetchType.LAZY, mappedBy="authors")
+	@ManyToMany(fetch=FetchType.LAZY, mappedBy="authors", cascade = {CascadeType.PERSIST})
+//	@JsonIgnore
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private Set<Book> books;
 
 	public Long getId() {
