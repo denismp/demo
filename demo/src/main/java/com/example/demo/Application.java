@@ -28,5 +28,3 @@ public class Application extends SpringBootServletInitializer implements WebAppl
 	
 	private static Class<Application> applicationClass = Application.class;
 }
-
-
