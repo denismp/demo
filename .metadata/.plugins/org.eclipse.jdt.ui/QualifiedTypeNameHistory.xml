@@ -1,18 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="javax.persistence.EntityManager"/>
-<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RestController"/>
-<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMapping"/>
-<fullyQualifiedTypeName name="com.example.demo.service.CarService"/>
-<fullyQualifiedTypeName name="org.springframework.http.ResponseEntity"/>
-<fullyQualifiedTypeName name="org.springframework.http.HttpStatus"/>
-<fullyQualifiedTypeName name="javax.persistence.GenerationType"/>
-<fullyQualifiedTypeName name="com.example.demo.entity.Car"/>
-<fullyQualifiedTypeName name="java.util.UUID"/>
-<fullyQualifiedTypeName name="com.example.demo.dao.UserDao"/>
-<fullyQualifiedTypeName name="org.springframework.data.jpa.repository.Query"/>
 <fullyQualifiedTypeName name="org.apache.log4j.Logger"/>
-<fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="org.springframework.context.annotation.Primary"/>
 <fullyQualifiedTypeName name="org.springframework.stereotype.Repository"/>
 <fullyQualifiedTypeName name="org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter"/>
@@ -29,16 +17,10 @@
 <fullyQualifiedTypeName name="javax.persistence.OneToMany"/>
 <fullyQualifiedTypeName name="org.springframework.stereotype.Component"/>
 <fullyQualifiedTypeName name="javax.persistence.MappedSuperclass"/>
-<fullyQualifiedTypeName name="javax.persistence.ManyToMany"/>
 <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
 <fullyQualifiedTypeName name="com.example.demo.dao.AuthorDao"/>
 <fullyQualifiedTypeName name="com.example.demo.dao.BookDao"/>
-<fullyQualifiedTypeName name="com.example.demo.entity.Book"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
-<fullyQualifiedTypeName name="java.util.HashSet"/>
-<fullyQualifiedTypeName name="java.util.Set"/>
 <fullyQualifiedTypeName name="com.example.demo.entity.User"/>
-<fullyQualifiedTypeName name="java.util.Date"/>
 <fullyQualifiedTypeName name="com.example.demo.service.BookService"/>
 <fullyQualifiedTypeName name="com.example.demo.service.UserService"/>
 <fullyQualifiedTypeName name="com.example.demo.service.AuthorService"/>
@@ -54,10 +36,28 @@
 <fullyQualifiedTypeName name="org.apache.tomcat.util.codec.binary.Base64"/>
 <fullyQualifiedTypeName name="org.apache.http.client.methods.HttpPut"/>
 <fullyQualifiedTypeName name="org.apache.http.client.methods.HttpDelete"/>
-<fullyQualifiedTypeName name="com.example.demo.entity.Author"/>
 <fullyQualifiedTypeName name="org.springframework.boot.web.servlet.FilterRegistrationBean"/>
 <fullyQualifiedTypeName name="org.springframework.web.cors.UrlBasedCorsConfigurationSource"/>
 <fullyQualifiedTypeName name="org.springframework.web.cors.CorsConfiguration"/>
 <fullyQualifiedTypeName name="org.springframework.web.filter.CorsFilter"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestBody"/>
+<fullyQualifiedTypeName name="com.example.demo.view.model.AuthorView"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
+<fullyQualifiedTypeName name="com.example.demo.entity.Author"/>
+<fullyQualifiedTypeName name="com.example.demo.view.model.AuthorFromBookView"/>
+<fullyQualifiedTypeName name="java.util.Set"/>
+<fullyQualifiedTypeName name="java.util.HashSet"/>
+<fullyQualifiedTypeName name="com.example.demo.view.model.BookFromAuthorView"/>
+<fullyQualifiedTypeName name="com.example.demo.entity.Book"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="com.example.demo.view.model.BookView"/>
+<fullyQualifiedTypeName name="com.example.demo.view.service.BookViewService"/>
+<fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="javax.persistence.ManyToMany"/>
+<fullyQualifiedTypeName name="com.fasterxml.jackson.annotation.JacksonAnnotation"/>
+<fullyQualifiedTypeName name="javax.persistence.CascadeType"/>
+<fullyQualifiedTypeName name="com.fasterxml.jackson.annotation.JsonIgnore"/>
+<fullyQualifiedTypeName name="com.fasterxml.jackson.annotation.JsonProperty"/>
+<fullyQualifiedTypeName name="com.fasterxml.jackson.annotation.JsonProperty.Access"/>
 </qualifiedTypeNameHistroy>

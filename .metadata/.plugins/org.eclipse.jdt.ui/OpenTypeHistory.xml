@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <typeInfoHistroy>
 <typeInfo handle="=demo/\/Library\/Java\/JavaVirtualMachines\/jdk1.8.0_66.jdk\/Contents\/Home\/jre\/lib\/rt.jar&lt;java.io(Serializable.class[Serializable" modifiers="1537" timestamp="1444173647000"/>
-<typeInfo handle="=demo/src\/main\/java&lt;com.example.demo.service{BookService.java[BookService" modifiers="513" timestamp="1518989427000"/>
+<typeInfo handle="=demo/src\/main\/java&lt;com.example.demo.service{BookService.java[BookService" modifiers="513" timestamp="1519522529000"/>
 <typeInfo handle="=demo/src\/main\/java&lt;com.example.demo.service{AuthorService.java[AuthorService" modifiers="513" timestamp="1518989209000"/>
 <typeInfo handle="=demo/\/Users\/denisputnam\/.m2\/repository\/org\/springframework\/data\/spring-data-jpa\/1.11.9.RELEASE\/spring-data-jpa-1.11.9.RELEASE.jar&lt;org.springframework.data.jpa.repository(JpaRepository.class[JpaRepository" modifiers="1537" timestamp="1512930095000"/>
+<typeInfo handle="=demo/src\/main\/java&lt;com.example.demo.view.service{BookViewService.java[BookViewService" modifiers="513" timestamp="1519695058000"/>
+<typeInfo handle="=demo/src\/main\/java&lt;com.example.demo.dao{BookDao.java[BookDao" modifiers="513" timestamp="1518993632000"/>
+<typeInfo handle="=demo/src\/main\/java&lt;com.example.demo.view.service{AuthorViewService.java[AuthorViewService" modifiers="513" timestamp="1519696225000"/>
 </typeInfoHistroy>
